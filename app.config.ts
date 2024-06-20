@@ -1,7 +1,8 @@
 export default defineAppConfig({
   ui: {
-    colorMode: {
-      preference: 'light'
+    ui: {
+      primary: 'blue',
+      gray: 'cool'
     }
   }
 });
