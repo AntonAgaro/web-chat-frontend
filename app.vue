@@ -1,9 +1,7 @@
-<script lang="ts">
-const a = 23322;
-</script>
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+    <NuxtLayout>
+      <NuxtPage/>
+    </NuxtLayout>
 </template>
+<script setup lang="ts">
+</script>
