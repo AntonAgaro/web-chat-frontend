@@ -1,4 +1,4 @@
-import { clientFetch } from '~/utils/functions';
+import { clientFetch, serverFetch } from '~/utils/functions';
 
 export const useAuthController = () => {
   const authUrl = useRuntimeConfig().public.baseApiUrl + '/auth';
@@ -15,5 +15,13 @@ export const useAuthController = () => {
     });
   };
 
-  return { signin, signup };
+  const getUserDetails = async (token: string) => {
+    return await serverFetch(authUrl + '/user-details', {
+      method: 'POST',
+      body: JSON.stringify({ token: token })
+    });
+
+  };
+
+  return { signin, signup, getUserDetails };
 };

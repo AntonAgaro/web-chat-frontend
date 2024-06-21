@@ -1,10 +1,14 @@
 import type { NitroFetchOptions } from 'nitropack';
 import type { AjaxResponse } from '~/types/AjaxResponse';
+import type { FetchOptions } from 'ofetch';
 
-export const clientFetch = async (url: string, options: NitroFetchOptions<any>) => {
+export const clientFetch = async (url: string, options: NitroFetchOptions<any> = {}) => {
   const messageBuilder = useToast();
   const res =  await $fetch(url, {
     credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     ...options
   }).catch((e) => {
     if (e.data.message) {
@@ -19,4 +23,34 @@ export const clientFetch = async (url: string, options: NitroFetchOptions<any>) 
   }
   console.log(data);
   return data;
+};
+
+export const serverFetch = async (url: string, params: NitroFetchOptions<any> = {}, callbacks?: {
+  onRequest?: (request: RequestInfo, options: FetchOptions<any>) => void;
+  onRequestError?: (request: RequestInfo, options: FetchOptions<any>, error: any) => void;
+  onResponse?: (request: RequestInfo, response: Response, options: FetchOptions<any>) => void;
+  onResponseError?: (request: RequestInfo, response: Response, options: FetchOptions<any>) => void;
+}) => {
+  const { data } = await useFetch(url, {
+    onRequest({ request, options }) {
+      callbacks?.onRequest?.(request, options);
+    },
+    onRequestError({ request, options, error }) {
+      callbacks?.onRequestError?.(request, options, error);
+      console.error('Request Error: ', error);
+    },
+    onResponse({ request, response, options }) {
+      callbacks?.onResponse?.(request, response, options);
+    },
+    onResponseError({ request, response, options }) {
+      callbacks?.onResponseError?.(request, response, options);
+      console.error('Response Error: ', response);
+    },
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    ...params,
+  });
+
+  return data.value as AjaxResponse || {};
 };
