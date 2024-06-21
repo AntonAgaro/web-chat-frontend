@@ -4,6 +4,7 @@ import type { AjaxResponse } from '~/types/AjaxResponse';
 export const clientFetch = async (url: string, options: NitroFetchOptions<any>) => {
   const messageBuilder = useToast();
   const res =  await $fetch(url, {
+    credentials: 'include',
     ...options
   }).catch((e) => {
     if (e.data.message) {
@@ -11,7 +12,7 @@ export const clientFetch = async (url: string, options: NitroFetchOptions<any>) 
     }
   });
 
-  const data = res as AjaxResponse;
+  const data = res as AjaxResponse || {};
   
   if (data.message) {
     messageBuilder.add({ title: data.message, color: 'green' });

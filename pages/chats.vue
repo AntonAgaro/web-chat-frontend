@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-
+const authState = useAuthState();
+console.log('from chats: ', authState.value.user);
 </script>
 
 <style scoped>

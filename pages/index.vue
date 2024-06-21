@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { object, string } from 'yup';
 import  { useAuthController } from '~/composables/authController';
+import { useAuthState } from '~/composables/authState';
 
 const authController = useAuthController();
 const schema = object({
@@ -21,9 +22,12 @@ const state = ref({
   password: ''
 });
 
-//TODO сделать глобальный слушатель на ответы сервера и выводить сообщения
+const authState = useAuthState();
+const router = useRouter();
+
 //TODO вынимать здесь из ответов user и помещать в стейт
-//TODO сделать защиту роутов и редирект если есть юзер
+//TODO сделать защиту роутов и редирект на регистрацию если нет юзера
+//TODO читать куку на сервере и посылать токен на api для проверки авторизации
 //TODO добавить тесты и hacky
 async function onSubmit () {
   const user = {
@@ -32,6 +36,11 @@ async function onSubmit () {
   };
 
   const res = await authController[state.value.mode === AuthMode.SignIn ? 'signin' : 'signup'](user);
+  if (res.user ) {
+    authState.value.user = res.user;
+    await router.push('/chats');
+  }
+
   console.log('from page: ', res);
 }
 </script>

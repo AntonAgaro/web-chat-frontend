@@ -1,3 +1,1 @@
-export type AjaxResponse = {
-  message?: string
-};
+export type AjaxResponse = Record<string, any>;
