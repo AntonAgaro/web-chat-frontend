@@ -55,7 +55,6 @@ async function onSubmit () {
     >
       <h1 class="text-4xl text-center">{{ state.mode === AuthMode.SignIn ? 'Sign in' : 'Sign up' }}</h1>
       <UFormGroup label="Login" name="login">
-        {{state.login}}
         <UInput v-model="state.login" color="blue" />
       </UFormGroup>
 
