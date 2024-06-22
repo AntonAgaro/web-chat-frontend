@@ -1,27 +1,30 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  if (import.meta.client) return;
+  if (import.meta.server)  {
+    const token = useCookie('token');
 
-  const token = useCookie('token');
-  const messageBuilder = useToast();
-
-  if (!token.value && to.path !== '/')  {
-    return navigateTo('/');
-  }
-
-  const authState = useAuthState();
-  const authController = useAuthController();
-  const data = await  authController.getUserDetails(token.value ?? '');
-
-  if (data.user) {
-    authState.value.user = data.user;
-    if (to.path === '/') {
-      return navigateTo('/chats');
+    if (!token.value && to.path !== '/')  {
+      return navigateTo('/');
     }
-  } else if (to.path !== '/') {
-    messageBuilder.add({ title: 'User is not authorized!', color: 'red' });
-    return navigateTo('/');
+
+    const authState = useAuthState();
+    const authController = useAuthController();
+    const data = await  authController.getUserDetails(token.value ?? '');
+
+    if (data.user) {
+      authState.value.user = data.user;
+      if (to.path === '/') {
+        return navigateTo('/chats');
+      }
+    } else if (to.path !== '/') {
+      return navigateTo('/');
+    }
+  } else if (import.meta.client) {
+    const authState = useAuthState();
+
+    if (to.path !== '/' && !authState.value.user) {
+      const messageBuilder = useToast();
+      messageBuilder.add({ title: 'You have to sign in!', color: 'red' });
+      return navigateTo('/');
+    }
   }
-
 });
-
-//TODO middleware for client, maybe watcher for authstate user

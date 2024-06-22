@@ -1,11 +1,6 @@
 <template>
     <div class="page-wrapper">
-      <header class="page-header">
-       <div class="container">
-         <h2>Header</h2>
-         <switch-theme />
-       </div>
-      </header>
+      <app-header/>
       <main class="page-content">
        <div class="container">
          <slot />

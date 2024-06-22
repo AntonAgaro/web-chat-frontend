@@ -23,5 +23,11 @@ export const useAuthController = () => {
 
   };
 
-  return { signin, signup, getUserDetails };
+  const logout = async () => {
+    return await clientFetch(authUrl + '/logout', {
+      method: 'POST'
+    });
+  };
+
+  return { signin, signup, getUserDetails, logout };
 };
