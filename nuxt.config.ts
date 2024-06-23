@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     port: Number(process.env.PORT ?? 3000),
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/ui'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/test-utils/module'],
   css: ['~/assets/css/main.css'],
   colorMode: {
     preference: 'light'

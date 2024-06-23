@@ -1,5 +1,5 @@
 <template>
-  <header class="page-header">
+  <header class="page-header" data-testid="app-header">
     <div class="container">
       <div class="pt-2 pb-2 flex justify-between">
         <switch-theme />

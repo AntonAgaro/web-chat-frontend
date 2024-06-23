@@ -25,9 +25,6 @@ const state = ref({
 const authState = useAuthState();
 const router = useRouter();
 
-//TODO вынимать здесь из ответов user и помещать в стейт
-//TODO сделать защиту роутов и редирект на регистрацию если нет юзера
-//TODO читать куку на сервере и посылать токен на api для проверки авторизации
 //TODO добавить тесты и hacky
 async function onSubmit () {
   const user = {
@@ -46,11 +43,12 @@ async function onSubmit () {
 </script>
 
 <template>
-  <div class="h-full w-full flex align-middle justify-center">
+  <div class="h-full w-full flex align-middle justify-center" data-testid="index-page">
     <UForm
         :schema="schema"
         :state="state"
         class="w-full max-w-lg flex flex-col align-middle justify-center space-y-6"
+        data-testid="auth-form"
         @submit="onSubmit"
     >
       <h1 class="text-4xl text-center">{{ state.mode === AuthMode.SignIn ? 'Sign in' : 'Sign up' }}</h1>
@@ -68,8 +66,9 @@ async function onSubmit () {
       <div>
         Don't have an account?
         <span
+          data-testid="auth-mode-btn"
           class="text-blue-600 cursor-pointer"
-          @click="state.mode = state.mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn"
+          @click="() => {state.mode = state.mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn;console.log('12313123')}"
         >
           Create
         </span>
