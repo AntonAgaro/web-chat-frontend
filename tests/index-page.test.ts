@@ -1,5 +1,5 @@
 import { it, describe, expect } from 'vitest';
-import indexPage from './index.vue';
+import indexPage from '../pages/index.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 
 describe('Index page', () => {

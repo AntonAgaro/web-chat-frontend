@@ -22,7 +22,8 @@ const dropdownItems = [
       click: () => {
         authState.value.user = null;
         useAuthController().logout();
-      }
+      },
+      class: 'testid-logout'
     }
   ],
   [

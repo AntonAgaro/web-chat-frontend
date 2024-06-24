@@ -51,16 +51,30 @@ async function onSubmit () {
         data-testid="auth-form"
         @submit="onSubmit"
     >
-      <h1 class="text-4xl text-center">{{ state.mode === AuthMode.SignIn ? 'Sign in' : 'Sign up' }}</h1>
+      <h1
+        class="text-4xl text-center"
+        data-testid="auth-form-title"
+      >
+        {{ state.mode === AuthMode.SignIn ? 'Sign in' : 'Sign up' }}
+      </h1>
       <UFormGroup label="Login" name="login">
-        <UInput v-model="state.login" color="blue" />
+        <UInput
+          v-model="state.login"
+          color="blue"
+          data-testid="login-input"
+        />
       </UFormGroup>
 
       <UFormGroup label="Password" name="password">
-        <UInput v-model="state.password" color="blue" type="password" />
+        <UInput
+          v-model="state.password"
+          color="blue"
+          type="password"
+          data-testid="password-input"
+      />
       </UFormGroup>
 
-      <UButton class="max-w-max" color="blue" type="submit">
+      <UButton class="max-w-max" color="blue" type="submit" data-testid="auth-form-btn">
         Submit
       </UButton>
       <div>
@@ -68,7 +82,7 @@ async function onSubmit () {
         <span
           data-testid="auth-mode-btn"
           class="text-blue-600 cursor-pointer"
-          @click="() => {state.mode = state.mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn;console.log('12313123')}"
+          @click="state.mode = state.mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn"
         >
           Create
         </span>
