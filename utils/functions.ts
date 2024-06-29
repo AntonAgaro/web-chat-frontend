@@ -54,3 +54,12 @@ export const serverFetch = async (url: string, params: NitroFetchOptions<any> = 
 
   return data.value as AjaxResponse || {};
 };
+
+
+export function getFormateedDate(): string {
+  const date = new Date();
+  const day = ('0' + date.getDate()).slice(-2);
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
