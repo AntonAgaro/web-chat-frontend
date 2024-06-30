@@ -8,7 +8,7 @@
       </main>
       <footer class="page-footer">
         <div class="container">
-          <h2>Footer</h2>
+          <switch-locale/>
         </div>
       </footer>
     </div>

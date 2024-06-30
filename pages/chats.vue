@@ -1,7 +1,7 @@
 <template>
   <div class="chats-page border-gray-700	border flex h-full" data-testid="chats-page">
     <div class="chats-list pt-2 pb-2 border-r border-gray-700 basis-1/3">
-      <h3>Chats List</h3>
+      <h3>{{ $t('Chats list') }}</h3>
       <div class="list flex flex-col">
         <ChatCard/>
         <ChatCard/>
