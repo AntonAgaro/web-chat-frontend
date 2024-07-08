@@ -1,4 +1,12 @@
 {
   "Chats": "Чаты",
-  "Chats list": "Список чатов"
+  "Chats list": "Список чатов",
+  "Sign in": "Вход",
+  "Sign up": "Регистрация",
+  "Login": "Логин",
+  "Password": "Пароль",
+  "Don't have an account?": "Еще нет аккаунта?",
+  "Create": "Создать",
+  "Required (Input)": "Поле не должно быть пустым",
+  "MinSymbolsCount": "Не менее { count } символов"
 }

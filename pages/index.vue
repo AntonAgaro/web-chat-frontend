@@ -2,13 +2,13 @@
 import { object, string } from 'yup';
 import  { useAuthController } from '~/composables/authController';
 import { useAuthState } from '~/composables/authState';
-
+const { t } = useI18n();
 const authController = useAuthController();
 const schema = object({
-  login: string().required('Required'),
+  login: string().required(t('Required (Input)')),
   password: string()
-    .min(8, 'Must be at least 8 characters')
-    .required('Required')
+    .min(8, t('MinSymbolsCount', { count: 8 }))
+    .required(t('Required (Input)'))
 });
 
 enum AuthMode {
@@ -37,8 +37,6 @@ async function onSubmit () {
     authState.value.user = res.user;
     await router.push('/chats');
   }
-
-  console.log('from page: ', res);
 }
 </script>
 
@@ -55,9 +53,9 @@ async function onSubmit () {
         class="text-4xl text-center"
         data-testid="auth-form-title"
       >
-        {{ state.mode === AuthMode.SignIn ? 'Sign in' : 'Sign up' }}
+        {{ state.mode === AuthMode.SignIn ? $t('Sign in') : $t('Sign up') }}
       </h1>
-      <UFormGroup label="Login" name="login">
+      <UFormGroup :label="$t('Login')" name="login">
         <UInput
           v-model="state.login"
           color="blue"
@@ -65,7 +63,7 @@ async function onSubmit () {
         />
       </UFormGroup>
 
-      <UFormGroup label="Password" name="password">
+      <UFormGroup :label="$t('Password')" name="password">
         <UInput
           v-model="state.password"
           color="blue"
@@ -75,16 +73,16 @@ async function onSubmit () {
       </UFormGroup>
 
       <UButton class="max-w-max" color="blue" type="submit" data-testid="auth-form-btn">
-        Submit
+        {{ state.mode === AuthMode.SignIn ? $t('Sign in') : $t('Sign up') }}
       </UButton>
       <div>
-        Don't have an account?
+        {{ $t("Don't have an account?") }}
         <span
           data-testid="auth-mode-btn"
           class="text-blue-600 cursor-pointer"
           @click="state.mode = state.mode === AuthMode.SignIn ? AuthMode.SignUp : AuthMode.SignIn"
         >
-          Create
+          {{ $t('Create') }}
         </span>
       </div>
     </UForm>
