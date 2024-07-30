@@ -8,5 +8,6 @@
   "Don't have an account?": "Еще нет аккаунта?",
   "Create": "Создать",
   "Required (Input)": "Поле не должно быть пустым",
-  "MinSymbolsCount": "Не менее { count } символов"
+  "MinSymbolsCount": "Не менее { count } символов",
+  "Choose chat": "Выберите чат"
 }

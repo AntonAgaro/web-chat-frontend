@@ -8,5 +8,6 @@
   "Don't have an account?": "Don't have an account?",
   "Create": "Create",
   "Required (Input)": "Required",
-  "MinSymbolsCount": "Must be at least { count } characters"
+  "MinSymbolsCount": "Must be at least { count } characters",
+  "Choose chat": "Choose chat"
 }
